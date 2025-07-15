@@ -55,9 +55,31 @@ class _MainAppState extends State<MainApp> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  _text,
-                  style: TextStyle(fontSize: 120, fontWeight: FontWeight.bold),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.white, Colors.white30, Colors.white54],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    border: Border.all(color: Colors.black, width: 5),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black87,
+                        blurRadius: 20,
+                        offset: Offset(10, 10),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    _text,
+                    style: TextStyle(
+                      fontSize: 120,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 Text(
                   _alert,
@@ -67,23 +89,34 @@ class _MainAppState extends State<MainApp> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    _generateRandom();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xff8716d5),
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
-                    textStyle: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      _generateRandom();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff8716d5),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 60,
+                        vertical: 20,
+                      ),
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: Text(
+                      'SORTE!',
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  child: Text('SORTE!', style: TextStyle(color: Colors.white)),
                 ),
                 Text(
-                  'Números já sorteados: \n${_randomNumberList.toString()}',
+                  _randomNumberList.isEmpty
+                      ? ''
+                      : 'Números já sorteados: \n${_randomNumberList.toString()}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xff8716d5),

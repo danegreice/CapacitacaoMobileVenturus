@@ -1,14 +1,47 @@
+import 'package:aplicativo_series/add_tv_show_screen.dart';
+import 'package:aplicativo_series/custom_drawer.dart';
+import 'package:aplicativo_series/tv_show_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'tv_show_card.dart';
 import 'tv_show_data.dart';
+import 'tv_show_models.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  final List<TvShow> tvShows = favTvShowList;
+
+  //screen control
+  int currentScreenIndex = 0;
+
+  List<Widget> get screens => [
+    TvShowScreen(tvShows: tvShows),
+    AddTvShowScreen(),
+  ];
+
+  void switchScreen(int index) {
+    setState(() {
+      currentScreenIndex = index;
+    });
+  }
+
+  //Theme control
+  bool isDarkTheme = false;
+
+  void switchTheme() {
+    setState(() {
+      isDarkTheme = !isDarkTheme;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +69,7 @@ class MainApp extends StatelessWidget {
           fontWeight: FontWeight.bold,
           color: colorScheme.onPrimary,
         ),
+        iconTheme: IconThemeData(color: colorScheme.onPrimary, size: 36),
       ),
       cardTheme: CardThemeData(
         color: colorScheme.primaryContainer,
@@ -58,6 +92,7 @@ class MainApp extends StatelessWidget {
           fontWeight: FontWeight.bold,
           color: colorSchemeDark.onPrimary,
         ),
+        iconTheme: IconThemeData(color: colorSchemeDark.onPrimary, size: 36),
       ),
       cardTheme: CardThemeData(
         color: colorSchemeDark.primaryContainer,
@@ -72,19 +107,15 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: customTheme,
       darkTheme: customThemeDark,
-      themeMode: ThemeMode.system,
+      themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       home: Scaffold(
         appBar: AppBar(title: Text('Eu amo séries')),
-        //body: ListView(
-        //  children: [
-        //    ...favTvShowList.map((tvShow) => TvShowCard(tvShow: tvShow)),
-        //  ],
-        //),
-        body: ListView.builder(
-          itemBuilder: (context, index) =>
-              TvShowCard(tvShow: favTvShowList[index], index: index),
-          itemCount: favTvShowList.length,
+        drawer: CustomDrawer(
+          isDarkTheme: isDarkTheme,
+          switchTheme: switchTheme,
+          switchScreen: switchScreen,
         ),
+        body: screens[currentScreenIndex],
       ),
     );
   }
