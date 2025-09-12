@@ -76,20 +76,18 @@ class _AddTvShowScreenState extends State<AddTvShowScreen> {
                   textInputAction: TextInputAction.done,
                 ),
                 SizedBox(height: 16),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Nota: ', style: TextStyle(fontSize: 16)),
-                      StarRating(
-                        onRatingChanged: (rating) {
-                          setState(() {
-                            _rating = rating;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Nota: ', style: TextStyle(fontSize: 16)),
+                    StarRating(
+                      onRatingChanged: (rating) {
+                        setState(() {
+                          _rating = rating;
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 SizedBox(height: 16),
                 ElevatedButton(

@@ -1,6 +1,5 @@
 import 'package:aplicativo_series/tv_show_models.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'tv_show_card.dart';
 
 class TvShowScreen extends StatefulWidget {
