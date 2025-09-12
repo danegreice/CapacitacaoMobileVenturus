@@ -3,11 +3,17 @@ import 'package:aplicativo_series/custom_drawer.dart';
 import 'package:aplicativo_series/tv_show_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'tv_show_data.dart';
 import 'tv_show_models.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TvShowModel(),
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatefulWidget {
@@ -20,12 +26,24 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   final List<TvShow> tvShows = favTvShowList;
 
+  void addTvShow(TvShow tvShow) {
+    setState(() {
+      tvShows.add(tvShow);
+    });
+  }
+
+  void removeTvShow(TvShow tvShow) {
+    setState(() {
+      tvShows.remove(tvShow);
+    });
+  }
+
   //screen control
   int currentScreenIndex = 0;
 
   List<Widget> get screens => [
-    TvShowScreen(tvShows: tvShows),
-    AddTvShowScreen(),
+    TvShowScreen(tvShows: tvShows, removeTvShow: removeTvShow),
+    AddTvShowScreen(addTvShow: addTvShow, switchScreen: switchScreen),
   ];
 
   void switchScreen(int index) {

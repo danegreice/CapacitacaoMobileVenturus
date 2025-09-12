@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import 'tv_show_models.dart';
 
 class AddTvShowScreen extends StatefulWidget {
-  const AddTvShowScreen({super.key});
+  const AddTvShowScreen({
+    super.key,
+    required this.addTvShow,
+    required this.switchScreen,
+  });
+
+  final Function(TvShow) addTvShow;
+  final Function(int) switchScreen;
 
   @override
   State<AddTvShowScreen> createState() => _AddTvShowScreenState();
@@ -94,6 +101,9 @@ class _AddTvShowScreenState extends State<AddTvShowScreen> {
                         summary: _summaryController.text,
                         rating: _rating,
                       );
+
+                      widget.addTvShow(newTvShow);
+                      widget.switchScreen(0);
                     }
                   },
                   child: Text('Adicionar'),

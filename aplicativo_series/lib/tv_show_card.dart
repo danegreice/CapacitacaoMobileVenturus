@@ -4,10 +4,16 @@ import 'tv_show_rating.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TvShowCard extends StatelessWidget {
-  const TvShowCard({super.key, required this.tvShow, required this.index});
+  const TvShowCard({
+    super.key,
+    required this.tvShow,
+    required this.index,
+    required this.removeTvShow,
+  });
 
   final TvShow tvShow;
   final int index;
+  final Function(TvShow) removeTvShow;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +56,20 @@ class TvShowCard extends StatelessWidget {
                 ],
               ),
               actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    removeTvShow(tvShow);
+                    Navigator.of(context).pop();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                  ),
+                  child: Text(
+                    'Excluir',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () => Navigator.of(context).pop(),
                   style: ElevatedButton.styleFrom(
