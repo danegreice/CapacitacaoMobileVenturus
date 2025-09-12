@@ -63,7 +63,7 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    var color = Colors.purple;
+    var color = Colors.tealAccent;
 
     var colorScheme = ColorScheme.fromSeed(
       seedColor: color,

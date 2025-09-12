@@ -104,7 +104,14 @@ class _AddTvShowScreenState extends State<AddTvShowScreen> {
                       widget.switchScreen(0);
                     }
                   },
-                  child: Text('Adicionar'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  child: Text(
+                    'Adicionar',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
