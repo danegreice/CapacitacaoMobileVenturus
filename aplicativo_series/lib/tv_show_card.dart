@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'tv_show_models.dart';
 import 'tv_show_rating.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TvShowCard extends StatelessWidget {
-  const TvShowCard({
-    super.key,
-    required this.tvShow,
-    required this.index,
-    required this.removeTvShow,
-  });
+  const TvShowCard({super.key, required this.tvShow, required this.index});
 
   final TvShow tvShow;
   final int index;
-  final Function(TvShow) removeTvShow;
+  //final Function(TvShow) removeTvShow;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +54,7 @@ class TvShowCard extends StatelessWidget {
               actions: [
                 ElevatedButton(
                   onPressed: () {
-                    removeTvShow(tvShow);
+                    context.read<TvShowModel>().removeTvShow(tvShow, context);
                     Navigator.of(context).pop();
                   },
                   style: ElevatedButton.styleFrom(

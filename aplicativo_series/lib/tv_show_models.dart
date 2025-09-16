@@ -19,13 +19,38 @@ class TvShowModel extends ChangeNotifier {
   final List<TvShow> _tvShows = favTvShowList;
   List<TvShow> get tvShows => _tvShows;
 
-  void addTvShow(TvShow tvShow) {
+  void addTvShow(TvShow tvShow, BuildContext context) {
     tvShows.add(tvShow);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '${tvShow.title} adicionado com sucesso!',
+          textAlign: TextAlign.center,
+        ),
+        duration: Duration(seconds: 2),
+      ),
+    );
     notifyListeners();
   }
 
-  void removeTvShow(TvShow tvShow) {
+  void removeTvShow(TvShow tvShow, BuildContext context) {
+    final indice = tvShows.indexOf(tvShow);
     tvShows.remove(tvShow);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${tvShow.title} removido com sucesso!'),
+        duration: Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'Desfazer',
+          onPressed: () {
+            tvShows.insert(indice, tvShow);
+            notifyListeners();
+          },
+        ),
+      ),
+    );
     notifyListeners();
   }
 }

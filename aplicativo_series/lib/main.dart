@@ -42,8 +42,8 @@ class _MainAppState extends State<MainApp> {
   int currentScreenIndex = 0;
 
   List<Widget> get screens => [
-    TvShowScreen(tvShows: tvShows, removeTvShow: removeTvShow),
-    AddTvShowScreen(addTvShow: addTvShow, switchScreen: switchScreen),
+    TvShowScreen(),
+    AddTvShowScreen(switchScreen: switchScreen),
   ];
 
   void switchScreen(int index) {

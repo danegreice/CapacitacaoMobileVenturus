@@ -1,15 +1,12 @@
 import 'package:aplicativo_series/star_rating.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'tv_show_models.dart';
 
 class AddTvShowScreen extends StatefulWidget {
-  const AddTvShowScreen({
-    super.key,
-    required this.addTvShow,
-    required this.switchScreen,
-  });
+  const AddTvShowScreen({super.key, required this.switchScreen});
 
-  final Function(TvShow) addTvShow;
+  //final Function(TvShow) addTvShow;
   final Function(int) switchScreen;
 
   @override
@@ -100,7 +97,8 @@ class _AddTvShowScreenState extends State<AddTvShowScreen> {
                         rating: _rating,
                       );
 
-                      widget.addTvShow(newTvShow);
+                      //Provider.of<TvShowModel>(context, listen: false).addTvShow(newTvShow);
+                      context.read<TvShowModel>().addTvShow(newTvShow, context);
                       widget.switchScreen(0);
                     }
                   },
