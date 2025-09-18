@@ -53,4 +53,17 @@ class TvShowModel extends ChangeNotifier {
     );
     notifyListeners();
   }
+
+  void updateTvShow(TvShow oldTvShow, TvShow newTvShow, BuildContext context) {
+    final indice = tvShows.indexOf(oldTvShow);
+    tvShows[indice] = newTvShow;
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Série ${indice + 1} atualizado com sucesso!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+    notifyListeners();
+  }
 }
